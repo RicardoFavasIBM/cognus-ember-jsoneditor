@@ -1,0 +1,64 @@
+<header>
+  <div class="title">
+    ember-json-editor
+  </div>
+  <a href="https://github.com/Glavin001/ember-jsoneditor" class="github">
+    <img class="github" alt="" role="presentation" src="images/GitHub-Mark-Light-32px.png" >
+  </a>
+</header>
+<div class="container">
+  <p>
+    Ember component using
+    <a href="https://github.com/josdejong/jsoneditor">
+      jsoneditor
+    </a>
+    to view, edit and format JSON.
+  </p>
+  <div class="row">
+    <div class="col-sm-5">
+      <h3>
+        Editor 1
+      </h3>
+      <JsonEditor
+        @json={{this.model}}
+        @mode={{this.mode}}
+        @name={{this.name}}
+      />
+      <p class="subTitles">
+        Options
+      </p>
+      <div>
+        Name:
+        {{input value=name}}
+      </div>
+      Mode:
+      {{!-- {{view Ember.Select content=modes value=mode}} --}}
+      <select onchange={{action (mut mode) value="target.value"}}>
+        {{#each this.modes key="@index" as |m|}}
+          <option value={{m}} selected={{eq m mode}}>
+            {{m}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="col-sm-5">
+      <h3>
+        Editor 2
+      </h3>
+      <JsonEditor
+        @json={{this.model}}
+        @modes={{this.modes}}
+        @mode="code"
+        @name="Two-Way Bindings"
+      />
+      <div class="col-sm-5">
+        <p class="subTitles">
+          Raw JSON
+        </p>
+        <pre>
+          <JsonPretty @obj={{this.model}} />
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
